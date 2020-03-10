@@ -13,6 +13,13 @@ export default class App extends React.Component {
     };
   }
 
+  setView(name, params) {
+    this.setState({
+      name: 'name',
+      params: {}
+    });
+  }
+
   render() {
     return (
       <div className="container">

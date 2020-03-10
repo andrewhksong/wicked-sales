@@ -24,7 +24,7 @@ export default class App extends React.Component {
     return (
       <div className="container">
         <Header />
-        <ProductList />
+        <ProductList onClick={ this.setView }/>
       </div>
     );
   }

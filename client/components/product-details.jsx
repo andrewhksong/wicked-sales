@@ -8,6 +8,15 @@ export default class ProductDetails extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const productId = this.props.productId;
+    fetch(`/api/products${productId}`)
+      .then(res => res.json())
+      .then(product => this.setState({
+        product: product
+      }));
+  }
+
   render() {
     return null;
   }

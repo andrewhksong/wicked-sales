@@ -18,6 +18,25 @@ export default class ProductDetails extends React.Component {
   }
 
   render() {
+    const product = this.state.product;
+    if (product) {
+      return (
+        <div className="container">
+          <a href="#"> Back to catalog </a>
+          <header>
+            <div className="col-sm-4">
+              <img src={ product.image } />
+            </div>
+            <div className="col-sm-8">
+              <h2>{ product.name }</h2>
+              <h4 className="text-muted">{ product.price }</h4>
+              <p>{ product.shortDescription }</p>
+            </div>
+          </header>
+          <div className="col-sm-12">{ product.longDescription }</div>
+        </div>
+      );
+    }
     return null;
   }
 }

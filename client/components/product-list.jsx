@@ -25,16 +25,18 @@ export default class ProductList extends React.Component {
     const items = this.state.products.map(product => {
       return (
         <ProductListItem
-          key={ product }
+          key={ product.productId }
           name={ product.name }
-          price={ product.price }
+          price={ (product.price / 100).toFixed(2) }
           image={ product.image }
-          description={ product.shortDescription } />
+          description={ product.shortDescription }
+          productId={ product.productId }
+          setView={ this.props.setView } />
       );
     });
     return (
       <div className="container">
-        <div className="row">
+        <div className="card-deck">
           {items}
         </div>
       </div>

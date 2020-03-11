@@ -9,8 +9,8 @@ export default class ProductDetails extends React.Component {
   }
 
   componentDidMount() {
-    const productId = this.props.productId;
-    fetch(`/api/products${productId}`)
+    const productId = this.props.product.productId;
+    fetch(`/api/products/${productId}`)
       .then(res => res.json())
       .then(product => this.setState({
         product: product
@@ -21,19 +21,22 @@ export default class ProductDetails extends React.Component {
     const product = this.state.product;
     if (product) {
       return (
-        <div className="container">
-          <a href="#"> Back to catalog </a>
-          <header>
-            <div className="col-sm-4">
-              <img src={ product.image } />
-            </div>
-            <div className="col-sm-8">
-              <h2>{ product.name }</h2>
-              <h4 className="text-muted">{ product.price }</h4>
-              <p>{ product.shortDescription }</p>
+        <div className="container card">
+          <div onClick={() => this.props.setView('catalog', {})}
+            style={{ cursor: 'pointer' }}>
+            <p className="text-muted mt-4 ml-3 mb-4"> &lt; Back to catalog </p>
+          </div>
+          <header className="pl-3 pr-3">
+            <div className="row mb-5">
+              <img className="col-sm-4" src={ product.image } />
+              <div className="col-sm-8">
+                <h2>{ product.name }</h2>
+                <h4 className="text-muted">${ (product.price / 100).toFixed(2) }</h4>
+                <p>{ product.shortDescription }</p>
+              </div>
             </div>
           </header>
-          <div className="col-sm-12">{ product.longDescription }</div>
+          <div className="col-sm-12 card-text mb-4">{ product.longDescription }</div>
         </div>
       );
     }

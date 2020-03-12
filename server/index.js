@@ -74,6 +74,11 @@ app.post('/api/cart/:productId', (req, res, next) => {
     .then(result => {
       if (!result.rows[0]) {
         throw new ClientError('Not found', 404);
+      } else if (req.session.cartId) {
+        return {
+          price: result.rows[0].price,
+          cartId: req.session.cartId
+        };
       } else {
         return db.query(`
           insert into "carts" ("cartId", "createdAt")
@@ -114,7 +119,8 @@ app.post('/api/cart/:productId', (req, res, next) => {
          where "c"."cartItemId" = $1
       `, [result.cartItemId])
         .then(result => res.status(201).json(result.rows[0]));
-    });
+    })
+    .catch(err => next(err));
 });
 
 app.use('/api', (req, res, next) => {

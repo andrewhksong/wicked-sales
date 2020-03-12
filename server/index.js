@@ -49,17 +49,28 @@ app.get('/api/products/:productId', (req, res, next) => {
 });
 
 app.get('/api/cart', (req, res, next) => {
+  const currentId = req.session.cartId;
   const sql = `
-    select *
-      from "cartItems"
+    select "c"."cartItemId",
+           "c"."price",
+           "p"."productId",
+           "p"."image",
+           "p"."name",
+           "p"."shortDescription"
+      from "cartItems" as "c"
+      join "products" as "p" using ("productId")
+     where "c"."cartId" = $1
   `;
-  db.query(sql)
+  if (!currentId) {
+    return res.json([]);
+  }
+  db.query(sql, [currentId])
     .then(result => res.json(result.rows))
     .catch(err => next(err));
 });
 
-app.post('/api/cart/:productId', (req, res, next) => {
-  const id = req.params.productId;
+app.post('/api/cart', (req, res, next) => {
+  const id = req.body.productId;
   const values = [`${id}`];
   const sql = `
     select "price" 
@@ -69,7 +80,6 @@ app.post('/api/cart/:productId', (req, res, next) => {
   if (parseInt(id) < 0 || isNaN(parseInt(id))) {
     return next(new ClientError('Bad request', 400));
   }
-
   db.query(sql, values)
     .then(result => {
       if (!result.rows[0]) {

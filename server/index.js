@@ -58,6 +58,39 @@ app.get('/api/cart', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.post('/api/cart/:productId', (req, res, next) => {
+  const id = parseInt(req.params.productId);
+  const values = [`${id}`];
+  const sql = `
+    select "price" 
+      from "products" 
+     where "productId" = $1;
+  `;
+  if (id < 0 || isNaN(id)) {
+    return next(new ClientError('Bad request', 400));
+  }
+
+  db.query(sql, values)
+    .then(result => {
+      if (!result.rows[0]) {
+        throw new ClientError('Not found', 404);
+      } else {
+        return db.query(`
+          insert into "carts" ("cartId", "createdAt")
+               values (default, default)
+            returning "cartId";
+        `)
+          .then(cartResult => {
+            return {
+              price: result.rows[0].price,
+              cartId: cartResult.rows[0].cartId
+            };
+          });
+      }
+    });
+  // .then(cart => console.log('returned from 1st then:', cart));
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });

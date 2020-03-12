@@ -59,14 +59,14 @@ app.get('/api/cart', (req, res, next) => {
 });
 
 app.post('/api/cart/:productId', (req, res, next) => {
-  const id = parseInt(req.params.productId);
+  const id = req.params.productId;
   const values = [`${id}`];
   const sql = `
     select "price" 
       from "products" 
      where "productId" = $1;
   `;
-  if (id < 0 || isNaN(id)) {
+  if (parseInt(id) < 0 || isNaN(parseInt(id))) {
     return next(new ClientError('Bad request', 400));
   }
 
@@ -87,8 +87,20 @@ app.post('/api/cart/:productId', (req, res, next) => {
             };
           });
       }
+    })
+    .then(cartObject => {
+      req.session.cartId = cartObject.cartId;
+      return db.query(`
+        insert into "cartItems" ("cartId", "productId", "price")
+             values ($1, $2, $3)
+          returning "cartItemId";
+      `, [cartObject.cartId, `${id}`, cartObject.price])
+        .then(result => {
+          return {
+            cartItemId: result.rows[0].cartItemId
+          };
+        });
     });
-  // .then(cart => console.log('returned from 1st then:', cart));
 });
 
 app.use('/api', (req, res, next) => {

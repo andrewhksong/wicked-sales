@@ -128,7 +128,8 @@ app.post('/api/cart', (req, res, next) => {
           join "products" as "p" using ("productId")
          where "c"."cartItemId" = $1
       `, [result.cartItemId])
-        .then(result => res.status(201).json(result.rows[0]));
+        .then(result => res.status(201).json(result.rows[0]))
+        .catch(err => next(err));
     })
     .catch(err => next(err));
 });

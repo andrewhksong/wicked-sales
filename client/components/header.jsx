@@ -11,7 +11,7 @@ export default class Header extends React.Component {
         </div>
         <div className="col-6 col-sm-6 d-flex flex-wrap align-items-center justify-content-end">
           <i className="fas fa-shopping-cart fa-xs mr-2 text-white"></i>
-          <p className="mr-5 text-white">{this.props.cartItems}</p>
+          <p className="mr-5 text-white">{ this.props.cartItems }</p>
         </div>
       </div>
     );

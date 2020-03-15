@@ -38,6 +38,17 @@ export default class App extends React.Component {
       }));
   }
 
+  addToCart(product) {
+    fetch('/api/cart', {
+      method: 'POST',
+      body: product.productId
+    })
+      .then(res => res.json())
+      .then(cartItems => this.setState({
+        cart: cartItems
+      }));
+  }
+
   render() {
     const view = this.state.view;
     if (view.name === 'catalog') {

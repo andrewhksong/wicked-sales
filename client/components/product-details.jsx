@@ -28,7 +28,7 @@ export default class ProductDetails extends React.Component {
           </div>
           <header className="pl-3 pr-3">
             <div className="row mb-5">
-              <img className="col-sm-4" src={ product.image } />
+              <img className="col-sm-4 card-dimensions" src={ product.image } />
               <div className="col-sm-8">
                 <h2>{ product.name }</h2>
                 <h4 className="text-muted">${ (product.price / 100).toFixed(2) }</h4>

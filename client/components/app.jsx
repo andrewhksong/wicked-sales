@@ -60,7 +60,7 @@ export default class App extends React.Component {
       return (
         <div>
           <Header setView={ this.setView } cartItems={ this.state.cart.length }/>
-          <ProductList setView={ this.setView }/>
+          <ProductList setView={ this.setView } view={this.state.view} />
         </div>
       );
     } else if (view.name === 'details') {

@@ -18,7 +18,10 @@ export default class ProductList extends React.Component {
       .then(res => res.json())
       .then(products => this.setState({
         products: products
-      }));
+      }))
+      .catch(error => console.error(
+        'error:', error.message
+      ));
   }
 
   render() {
@@ -35,8 +38,8 @@ export default class ProductList extends React.Component {
       );
     });
     return (
-      <div className="container">
-        <div className="card-deck">
+      <div className="container mb-4">
+        <div className="row d-flex justify-content-around">
           {items}
         </div>
       </div>

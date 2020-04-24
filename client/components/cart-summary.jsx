@@ -8,6 +8,18 @@ export default class CartSummary extends React.Component {
         <CartSummaryItem key={ product.productId } product={ product }/>
       );
     });
+    const initialValue = 0;
+    const total = this.props.cart.reduce((accum, currV) => {
+      return accum + currV.price;
+    }, initialValue);
+    const cartTotal = (total / 100).toFixed(2);
+    if (this.props.cart.length === 0) {
+      return (
+        <div>
+          <p>You haven&#39;t added anything yet!</p>
+        </div>
+      );
+    }
     return (
       <div className="container">
         <p className="text-muted"
@@ -19,6 +31,9 @@ export default class CartSummary extends React.Component {
               My Cart
         </h2>
         { cartList }
+        <div className="row justify-content-between m-2">
+          <h3 className="m-4">Cart Total ${cartTotal}</h3>
+        </div>
       </div>
     );
   }

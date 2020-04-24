@@ -12,8 +12,8 @@ export default class Header extends React.Component {
         <div className="col-6 col-sm-6 d-flex flex-wrap align-items-center justify-content-end"
           onClick={ () => this.props.setView('cart', {}) }
           style={ { cursor: 'pointer' } }>
-          <i className="fas fa-shopping-cart fa-xs mr-2 text-white"></i>
-          <p className="mr-5 text-white">{ this.props.cartItems }</p>
+          <i className="fas fa-shopping-cart mr-4 text-white"></i>
+          <p className="mr-4 text-white">{ this.props.cartItems }</p>
         </div>
       </div>
     );

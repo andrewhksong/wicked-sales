@@ -135,32 +135,23 @@ app.post('/api/cart', (req, res, next) => {
 });
 
 app.post('/api/orders', (req, res, next) => {
-  const order = req.body;
-  const values = [req.session.cartId, order.name, order.creditCard, order.shippingAddress];
+  const values = [req.session.cartId, req.body.name, req.body.creditCard, req.body.shippingAddress];
   const sql = `
   insert into "orders" ("cartId", "name", "creditCard", "shippingAddress")
-       values ($1, $2, $3, $4)
-    returning *
+  values ($1, $2, $3, $4)
+  returning *;
   `;
   if (!req.session.cartId) {
-    return res.status(400).json({
-      error: 'Invalid cartId'
-    });
+    throw new ClientError('Bad Request', 400);
   }
-  if (!order.name || !order.creditCard || !order.shippingAddress) {
-    return res.status(400).json({
-      error: 'fields name, credit card, and address are required'
-    });
+  if (!req.body.name || !req.body.creditCard || !req.body.shippingAddress) {
+    throw new ClientError('Bad Request', 400);
   }
   db.query(sql, values)
     .then(result => {
-      if (result.rowCount === 0) {
-        throw new ClientError('order not found', 400);
-      }
-      if (req.session.cartId) {
-        delete req.session.cartId;
-        return res.status(201).json(result.rows[0]);
-      }
+      const order = result.rows[0];
+      delete req.session.cartId;
+      res.status(201).json(order);
     })
     .catch(err => next(err));
 });

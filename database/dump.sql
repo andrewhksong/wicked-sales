@@ -250,6 +250,10 @@ COPY public."cartItems" ("cartItemId", "cartId", "productId", price) FROM stdin;
 19	6	1	2999
 20	6	1	2999
 21	7	2	2595
+22	6	3	2900
+23	8	3	2900
+24	9	1	2999
+25	9	2	2595
 \.
 
 
@@ -265,6 +269,8 @@ COPY public.carts ("cartId", "createdAt") FROM stdin;
 5	2020-04-24 08:50:49.18548+00
 6	2020-04-24 18:48:15.101516+00
 7	2020-04-24 21:16:29.163863+00
+8	2020-04-27 09:53:40.001287+00
+9	2020-04-27 23:40:51.735596+00
 \.
 
 
@@ -273,6 +279,7 @@ COPY public.carts ("cartId", "createdAt") FROM stdin;
 --
 
 COPY public.orders ("orderId", "cartId", name, "creditCard", "shippingAddress", "createdAt") FROM stdin;
+1	7	Tim Davis	123456789	123 LearningFuze	2020-04-24 21:34:29.799443+00
 \.
 
 
@@ -294,21 +301,21 @@ COPY public.products ("productId", name, price, image, "shortDescription", "long
 -- Name: cartItems_cartItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 21, true);
+SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 25, true);
 
 
 --
 -- Name: carts_cartId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."carts_cartId_seq"', 7, true);
+SELECT pg_catalog.setval('public."carts_cartId_seq"', 9, true);
 
 
 --
 -- Name: orders_orderId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."orders_orderId_seq"', 1, false);
+SELECT pg_catalog.setval('public."orders_orderId_seq"', 1, true);
 
 
 --

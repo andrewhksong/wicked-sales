@@ -1,12 +1,34 @@
 import React from 'react';
 
-class CheckoutForm extends React.Component {
+export default class CheckoutForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
         name: '',
-        creditCard: ''
+        creditCard: '',
+        shippingAddress: ''
         };
+        this.setName = this.setName.bind(this);
+        this.setCreditCard = this.setCreditCard.bind(this);
+        this.setShippingAddress = this.setShippingAddress.bind(this);
+        this.submitForm = this.submitForm.bind(this);
+    }
+
+    setName(event) {
+        this.setState({ name: event.target.value });
+    }
+
+    setCreditCard(event) {
+        this.setState({ creditCard: event.target.value });
+    }
+
+    setShippingAddress(event) {
+        this.setState({ shippingAddress: event.target.value });
+    }
+
+    submitForm(event) {
+        event.preventDefault();
+        this.props.placeOrder(this.state);
     }
 
     render() {
@@ -16,7 +38,8 @@ class CheckoutForm extends React.Component {
         }, initialValue);
         const cartTotal = (total / 100).toFixed(2);
         return (
-        <form className="container">
+        <form className="container"
+              onSubmit={ this.submitForm }>
             <p className="redirect text-muted"
                 style={{ cursor: 'pointer' }}
                 onClick={() => this.props.setView('cart', {})}>
@@ -25,21 +48,32 @@ class CheckoutForm extends React.Component {
             <h2>Total ${cartTotal}</h2>
             <div className="d-flex flex-column form-group">
                 <label htmlFor="name">Full Name</label>
-                <input type="text" 
-                       id="name" 
-                       placeholder="Name" 
-                       className="form-control"/>
+                <input type="text"
+                       id="name"
+                       placeholder="John Doe"
+                       className="form-control"
+                       onChange={ this.setName }
+                       required/>
             </div>
             <div className="d-flex flex-column form-group">
                 <label htmlFor="credit">Credit Card Number</label>
-                <input type="number" 
-                       id="credit" 
-                       placeholder="Credit Card Number"
-                       className="form-control"/>
+                <input type="text"
+                       id="credit"
+                       placeholder="4242 4242 4242 4242 MM/YY"
+                       className="form-control"
+                       onChange={ this.setCreditCard }
+                       minLength='18'
+                       maxLength='19'
+                       required/>
             </div>
             <div className="d-flex flex-column form-group">
                 <label htmlFor="shipping">Street Address 1</label>
-                <textarea id="shipping" className="form-control" rows="2"></textarea>
+                <textarea id="shipping"
+                          className="form-control"
+                          onChange={ this.setShippingAddress }
+                          rows="2"
+                          required>
+                </textarea>
             </div>
             <div className="d-flex justify-content-between">
                 <p className="redirect text-muted"
@@ -47,11 +81,12 @@ class CheckoutForm extends React.Component {
                    onClick={() => this.props.setView('catalog', {})}>
                    &lt; Continue Shopping
                 </p>
-                <button className="btn btn-primary">Place Order</button>
+                <button className="btn btn-primary"
+                        type="submit">
+                    Place Order
+                </button>
             </div>
         </form>
         );
     }
 }
-
-export default CheckoutForm;

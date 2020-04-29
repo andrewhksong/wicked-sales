@@ -6,7 +6,8 @@ export default class Header extends React.Component {
       <div className="row bg-dark mb-5">
         <div className="col-6 col-sm-6">
           <p className="container text-white font-weight-bold pt-4 ml-sm-5 ml-2"
-            onClick={() => this.props.setView('catalog', {})}> $ Wicked Sales </p>
+             onClick={() => this.props.setView('catalog', {})}
+             style={ { cursor: 'pointer' } }> $ Wicked Sales </p>
           <img />
         </div>
         <div className="col-6 col-sm-6 d-flex flex-wrap align-items-center justify-content-end"

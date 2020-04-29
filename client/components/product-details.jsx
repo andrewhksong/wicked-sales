@@ -21,10 +21,10 @@ export default class ProductDetails extends React.Component {
     const product = this.state.product;
     if (product) {
       return (
-        <div className="container card">
+        <div className="container cart mb-5">
           <div onClick={() => this.props.setView('catalog', {})}
             style={{ cursor: 'pointer' }}>
-            <p className="text-muted mt-4 ml-3 mb-4"> &lt; Back to catalog </p>
+            <p className="redirect text-muted mt-4 ml-3 mb-4"> &lt; Back to catalog </p>
           </div>
           <header className="pl-3 pr-3">
             <div className="row mb-5">

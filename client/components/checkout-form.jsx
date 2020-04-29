@@ -17,7 +17,7 @@ class CheckoutForm extends React.Component {
         const cartTotal = (total / 100).toFixed(2);
         return (
         <form className="container">
-            <p className="text-muted"
+            <p className="redirect text-muted"
                 style={{ cursor: 'pointer' }}
                 onClick={() => this.props.setView('cart', {})}>
                 &lt; Back to Cart
@@ -42,7 +42,7 @@ class CheckoutForm extends React.Component {
                 <textarea id="shipping" className="form-control" rows="2"></textarea>
             </div>
             <div className="d-flex justify-content-between">
-                <p className="text-muted"
+                <p className="redirect text-muted"
                    style={{ cursor: 'pointer' }}
                    onClick={() => this.props.setView('catalog', {})}>
                    &lt; Continue Shopping

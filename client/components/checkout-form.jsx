@@ -45,18 +45,18 @@ class CheckoutForm extends React.Component {
                 <input type="text"
                        id="name"
                        placeholder="Name"
-                       className="form-control"/>
+                       className="form-control" onChange={ this.setName }/>
             </div>
             <div className="d-flex flex-column form-group">
                 <label htmlFor="credit">Credit Card Number</label>
                 <input type="number"
                        id="credit"
                        placeholder="Credit Card Number"
-                       className="form-control"/>
+                       className="form-control" onChange={ this.setCreditCard }/>
             </div>
             <div className="d-flex flex-column form-group">
                 <label htmlFor="shipping">Street Address 1</label>
-                <textarea id="shipping" className="form-control" rows="2"></textarea>
+                <textarea id="shipping" className="form-control" onChange={ this.setShippingAddress } rows="2"></textarea>
             </div>
             <div className="d-flex justify-content-between">
                 <p className="redirect text-muted"

@@ -21,18 +21,22 @@ export default class CartSummary extends React.Component {
       );
     }
     return (
-      <div className="container">
+      <div className="container mb-5">
         <p className="text-muted"
-          style={{ cursor: 'pointer' }}
-          onClick={() => this.props.setView('catalog', {})}>
-             &lt; Back to catalog
+           style={{ cursor: 'pointer' }}
+           onClick={() => this.props.setView('catalog', {})}>
+           &lt; Back to catalog
         </p>
-        <h2 className="mb-2">
-              My Cart
-        </h2>
-        { cartList }
-        <div className="row justify-content-between m-2">
-          <h3 className="m-4">Cart Total ${cartTotal}</h3>
+        <h2 className="mb-2">My Cart</h2>
+        <div className="card p-2 m-1">
+          { cartList }
+          <div className="d-flex justify-content-between p-3">
+            <h3 className="m-1">Cart Total ${cartTotal}</h3>
+            <button className="btn btn-primary"
+                    onClick={() => this.props.setView('checkout', {})}>
+                    Checkout
+            </button>
+          </div>
         </div>
       </div>
     );

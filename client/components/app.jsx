@@ -3,6 +3,7 @@ import Header from './header';
 import ProductList from './product-list';
 import ProductDetails from './product-details';
 import CartSummary from './cart-summary';
+import CheckoutForm from './checkout-form';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -54,6 +55,16 @@ export default class App extends React.Component {
       }));
   }
 
+  placeOrder(order) {
+    fetch('/api/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(order)
+    })
+      .then(() => this.setState({ cart: [] }))
+      .then(() => this.setView('catalog', {}));
+  }
+
   render() {
     const view = this.state.view;
     if (view.name === 'catalog') {
@@ -78,6 +89,13 @@ export default class App extends React.Component {
         <div>
           <Header setView={ this.setView } cartItems={ this.state.cart.length }/>
           <CartSummary cart={ this.state.cart } setView={ this.setView }/>
+        </div>
+      );
+    } else if (view.name === 'checkout') {
+      return (
+        <div>
+          <Header setView={ this.setView } cartItems={ this.state.cart.length }/>
+          <CheckoutForm cart={ this.state.cart } setView={ this.setView }/>
         </div>
       );
     }

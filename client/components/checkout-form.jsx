@@ -1,6 +1,6 @@
 import React from 'react';
 
-class CheckoutForm extends React.Component {
+export default class CheckoutForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -11,6 +11,7 @@ class CheckoutForm extends React.Component {
         this.setName = this.setName.bind(this);
         this.setCreditCard = this.setCreditCard.bind(this);
         this.setShippingAddress = this.setShippingAddress.bind(this);
+        this.submiteForm = this.submiteForm.bind(this);
     }
 
     setName(event) {
@@ -25,6 +26,11 @@ class CheckoutForm extends React.Component {
         this.setState({ shippingAddress: event.target.value });
     }
 
+    submitForm(event) {
+        event.preventDefault();
+        this.props.placeOrder(this.state);
+    }
+
     render() {
         const initialValue = 0;
         const total = this.props.cart.reduce((accum, currV) => {
@@ -33,7 +39,7 @@ class CheckoutForm extends React.Component {
         const cartTotal = (total / 100).toFixed(2);
         return (
         <form className="container"
-              onSubmit={() => this.props.placeOrder(this.state)}>
+              onSubmit={ this.submitForm }>
             <p className="redirect text-muted"
                 style={{ cursor: 'pointer' }}
                 onClick={() => this.props.setView('cart', {})}>
@@ -64,11 +70,9 @@ class CheckoutForm extends React.Component {
                    onClick={() => this.props.setView('catalog', {})}>
                    &lt; Continue Shopping
                 </p>
-                <button className="btn btn-primary">Place Order</button>
+                <button className="btn btn-primary" type="submit">Place Order</button>
             </div>
         </form>
         );
     }
 }
-
-export default CheckoutForm;

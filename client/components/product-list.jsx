@@ -40,7 +40,7 @@ export default class ProductList extends React.Component {
     return (
       <div className="container mb-4">
         <div className="row d-flex justify-content-around">
-          {items}
+          { items }
         </div>
       </div>
     );

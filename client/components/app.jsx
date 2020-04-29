@@ -71,14 +71,20 @@ export default class App extends React.Component {
     if (view.name === 'catalog') {
       return (
         <div>
-          <Header setView={ this.setView } cartItems={ this.state.cart.length }/>
-          <ProductList setView={ this.setView } view={this.state.view} />
+          <Header
+            setView={ this.setView }
+            cartItems={ this.state.cart.length }/>
+          <ProductList
+            setView={ this.setView }
+            view={this.state.view} />
         </div>
       );
     } else if (view.name === 'details') {
       return (
         <div>
-          <Header setView={ this.setView } cartItems={ this.state.cart.length }/>
+          <Header
+            setView={ this.setView }
+            cartItems={ this.state.cart.length }/>
           <ProductDetails
             product={ view.params }
             setView={ this.setView }
@@ -88,15 +94,24 @@ export default class App extends React.Component {
     } else if (view.name === 'cart') {
       return (
         <div>
-          <Header setView={ this.setView } cartItems={ this.state.cart.length }/>
-          <CartSummary cart={ this.state.cart } setView={ this.setView }/>
+          <Header
+            setView={ this.setView }
+            cartItems={ this.state.cart.length }/>
+          <CartSummary
+            cart={ this.state.cart }
+            setView={ this.setView }/>
         </div>
       );
     } else if (view.name === 'checkout') {
       return (
         <div>
-          <Header setView={ this.setView } cartItems={ this.state.cart.length }/>
-          <CheckoutForm cart={ this.state.cart } setView={ this.setView } placeOrder={ this.placeOrder }/>
+          <Header
+            setView={ this.setView }
+            cartItems={ this.state.cart.length }/>
+          <CheckoutForm
+            cart={ this.state.cart }
+            setView={ this.setView }
+            placeOrder={ this.placeOrder }/>
         </div>
       );
     }

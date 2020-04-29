@@ -11,7 +11,7 @@ export default class CheckoutForm extends React.Component {
         this.setName = this.setName.bind(this);
         this.setCreditCard = this.setCreditCard.bind(this);
         this.setShippingAddress = this.setShippingAddress.bind(this);
-        this.submiteForm = this.submiteForm.bind(this);
+        this.submitForm = this.submitForm.bind(this);
     }
 
     setName(event) {
@@ -50,19 +50,30 @@ export default class CheckoutForm extends React.Component {
                 <label htmlFor="name">Full Name</label>
                 <input type="text"
                        id="name"
-                       placeholder="Name"
-                       className="form-control" onChange={ this.setName }/>
+                       placeholder="John Doe"
+                       className="form-control"
+                       onChange={ this.setName }
+                       required/>
             </div>
             <div className="d-flex flex-column form-group">
                 <label htmlFor="credit">Credit Card Number</label>
-                <input type="number"
+                <input type="text"
                        id="credit"
-                       placeholder="Credit Card Number"
-                       className="form-control" onChange={ this.setCreditCard }/>
+                       placeholder="4242 4242 4242 4242 MM/YY"
+                       className="form-control"
+                       onChange={ this.setCreditCard }
+                       minLength='18'
+                       maxLength='19'
+                       required/>
             </div>
             <div className="d-flex flex-column form-group">
                 <label htmlFor="shipping">Street Address 1</label>
-                <textarea id="shipping" className="form-control" onChange={ this.setShippingAddress } rows="2"></textarea>
+                <textarea id="shipping"
+                          className="form-control"
+                          onChange={ this.setShippingAddress }
+                          rows="2"
+                          required>
+                </textarea>
             </div>
             <div className="d-flex justify-content-between">
                 <p className="redirect text-muted"
@@ -70,7 +81,10 @@ export default class CheckoutForm extends React.Component {
                    onClick={() => this.props.setView('catalog', {})}>
                    &lt; Continue Shopping
                 </p>
-                <button className="btn btn-primary" type="submit">Place Order</button>
+                <button className="btn btn-primary"
+                        type="submit">
+                    Place Order
+                </button>
             </div>
         </form>
         );

@@ -5,8 +5,24 @@ class CheckoutForm extends React.Component {
         super(props);
         this.state = {
         name: '',
-        creditCard: ''
+        creditCard: '',
+        shippingAddress: ''
         };
+        this.setName = this.setName.bind(this);
+        this.setCreditCard = this.setCreditCard.bind(this);
+        this.setShippingAddress = this.setShippingAddress.bind(this);
+    }
+
+    setName(event) {
+        this.setState({ name: event.target.value });
+    }
+
+    setCreditCard(event) {
+        this.setState({ creditCard: event.target.value });
+    }
+
+    setShippingAddress(event) {
+        this.setState({ shippingAddress: event.target.value });
     }
 
     render() {
@@ -16,7 +32,8 @@ class CheckoutForm extends React.Component {
         }, initialValue);
         const cartTotal = (total / 100).toFixed(2);
         return (
-        <form className="container">
+        <form className="container"
+              onSubmit={() => this.props.placeOrder(this.state)}>
             <p className="redirect text-muted"
                 style={{ cursor: 'pointer' }}
                 onClick={() => this.props.setView('cart', {})}>
@@ -25,15 +42,15 @@ class CheckoutForm extends React.Component {
             <h2>Total ${cartTotal}</h2>
             <div className="d-flex flex-column form-group">
                 <label htmlFor="name">Full Name</label>
-                <input type="text" 
-                       id="name" 
-                       placeholder="Name" 
+                <input type="text"
+                       id="name"
+                       placeholder="Name"
                        className="form-control"/>
             </div>
             <div className="d-flex flex-column form-group">
                 <label htmlFor="credit">Credit Card Number</label>
-                <input type="number" 
-                       id="credit" 
+                <input type="number"
+                       id="credit"
                        placeholder="Credit Card Number"
                        className="form-control"/>
             </div>

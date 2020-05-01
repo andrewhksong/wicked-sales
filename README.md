@@ -13,7 +13,7 @@ A full stack Node.js and React shopping cart app.
 - AWS EC2
 
 # Live Demo
-https://wicked-sales.andrewsong.org/
+Link: https://wicked-sales.andrewsong.org/
 
 # Features
 - User can view catalog of products
@@ -36,8 +36,8 @@ https://wicked-sales.andrewsong.org/
 
 1. Clone this repository.
 ```shell
-git clone https://github.com/andrewhksong/wicked-sales-js
-cd wicked-sales-js
+git clone https://github.com/andrewhksong/wicked-sales
+cd wicked-sales
 ```
 
 2. Install all dependencies with NPM.

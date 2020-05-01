@@ -13,6 +13,7 @@ A full stack Node.js and React shopping cart app.
 - AWS EC2
 
 # Live Demo
+https://wicked-sales.andrewsong.org/
 
 # Features
 - User can view catalog of products
@@ -22,6 +23,7 @@ A full stack Node.js and React shopping cart app.
 - User can place an order
 
 # Preview
+![preview image](server/public/images/wicked-sales.gif)
 
 ## Development
 

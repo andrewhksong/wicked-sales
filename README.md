@@ -36,8 +36,8 @@ https://wicked-sales.andrewsong.org/
 
 1. Clone this repository.
 ```shell
-git clone https://github.com/andrewhksong/wicked-sales-js
-cd wicked-sales-js
+git clone https://github.com/andrewhksong/wicked-sales
+cd wicked-sales
 ```
 
 2. Install all dependencies with NPM.

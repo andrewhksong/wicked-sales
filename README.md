@@ -60,7 +60,7 @@ createdb wickedSales
 npm run db:import
 ```
 
-6. Use pdweb to access the database.
+6. Use pgweb to access the database.
 ```shell
 pgweb --db=wickedSales
 ```

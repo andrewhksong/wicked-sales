@@ -75,6 +75,10 @@ app.get('/api/cart', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/cart:productId/:cartItemId', (req, res, next) => {
+
+});
+
 app.post('/api/cart', (req, res, next) => {
   const id = req.body.productId;
   const values = [`${id}`];

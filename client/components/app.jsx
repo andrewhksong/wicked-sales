@@ -62,6 +62,7 @@ export default class App extends React.Component {
       method: 'DELETE'
     })
       .then(res => res.json())
+      .then(() => this.getCartItems())
       .catch(err => console.error(err));
   }
 

@@ -15,9 +15,7 @@ export default class CartSummaryItem extends React.Component {
             <h3 className="card-title">{ product.name }</h3>
             <p className="text-muted">${ (product.price / 100).toFixed(2)}</p>
             <p>{ product.shortDescription }</p>
-          </div>
-          <div>
-            <button onCLick={ () => product.deleteItem(product.cartItemId)}>
+            <button className="btn" onClick={ () => this.props.deleteItem(product.cartItemId) }>
               <i className="far fa-trash-alt"></i>
             </button>
           </div>

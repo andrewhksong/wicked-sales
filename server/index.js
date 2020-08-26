@@ -75,6 +75,23 @@ app.get('/api/cart', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.delete('/api/cart/:cartItemId', (req, res, next) => {
+  const { cartItemId } = req.params;
+  const values = [req.session.cartId, cartItemId];
+  if (isNaN(cartItemId)) {
+    return next(new ClientError('Bad Request', 400));
+  }
+  const sql = `
+    delete from "cartItems"
+          where "cartId" = $1
+            and "cartItemId" = $2
+      returning *
+  `;
+  db.query(sql, values)
+    .then(result => res.json(result.rows))
+    .catch(err => console.error(err));
+});
+
 app.post('/api/cart', (req, res, next) => {
   const id = req.body.productId;
   const values = [`${id}`];

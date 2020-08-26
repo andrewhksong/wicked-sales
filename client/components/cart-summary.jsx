@@ -6,8 +6,10 @@ export default class CartSummary extends React.Component {
     const cartList = this.props.cart.map(product => {
       return (
         <CartSummaryItem
-          key={ product.productId }
-          product={ product }/>
+          key={ product.cartItemId }
+          product={ product }
+          onClick={ this.handleClick }
+          deleteItem={ this.props.deleteItem }/>
       );
     });
     const initialValue = 0;
